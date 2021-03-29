@@ -2,4 +2,4 @@
 
 ### Relays only tweets containing media/images to a mastadon instance.
 
-#### Commisioned by LordKitsuna
+#### Commissioned by LordKitsuna
