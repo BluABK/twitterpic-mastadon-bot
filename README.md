@@ -1,5 +1,5 @@
 # twitterpic-mastadon-bot
 
-###Relays only tweets containing media/images to a mastadon instance.
+### Relays only tweets containing media/images to a mastadon instance.
 
-####Commisioned by LordKitsuna
+#### Commisioned by LordKitsuna
