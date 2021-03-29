@@ -3,7 +3,7 @@ import twitter
 
 TWITTER_API = None
 MEDIA_TYPES_AVAILABLE = ["photo", "video", "animated_gif"]
-MEDIA_IMAGE_TYPES = ["photo"]
+MEDIA_IMAGE_TYPES = ["photo", "video", "animated_gif"]
 
 
 def auth_api(api_key: str, api_secret: str, token_key: str, token_secret: str):

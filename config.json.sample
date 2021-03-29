@@ -8,5 +8,8 @@
   },
   "twitter": {
     "users": []
+  },
+  "mastodon_api": {
+    "endpoint": ""
   }
 }
