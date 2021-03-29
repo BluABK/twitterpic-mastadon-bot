@@ -19,7 +19,7 @@ if __name__ == "__main__":
                                           TWITTER_API_CONFIG["access_token_secret"])
 
     # Create an example examples/timeline.json to play with.
-    twitter_client.create_timeline_json(twitter_api, TWITTER_CONFIG["users"][0])
+    # twitter_client.create_timeline_json(twitter_api, TWITTER_CONFIG["users"][0])
 
     with open("examples/timeline.json", "r") as f:
         exampleTweets = json.load(f)
@@ -30,4 +30,8 @@ if __name__ == "__main__":
     print("Tweets with images:")
     image_tweets = twitter_client.filter_image_tweets(exampleTweets["tweets"])
     for tweet in image_tweets:
-        print(tweet)
+        image_tweet = twitter_client.get_image_urls_from_tweet(tweet)
+        print("{tid}: {urls}".format(tid=tweet["id_str"],
+                                     urls=", ".join(
+                                         twitter_client.get_image_urls_from_tweet(tweet))
+                                     ))

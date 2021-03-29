@@ -2,6 +2,8 @@ import json
 import twitter
 
 TWITTER_API = None
+MEDIA_TYPES_AVAILABLE = ["photo", "video", "animated_gif"]
+MEDIA_IMAGE_TYPES = ["photo"]
 
 
 def auth_api(api_key: str, api_secret: str, token_key: str, token_secret: str):
@@ -57,12 +59,35 @@ def create_timeline_json(api, screen_name):
     with open('examples/timeline.json', 'w+') as f:
         json.dump(dct, f)
 
+
 def filter_image_tweets(tweet_list: list):
+    has_images = False
     image_tweets = []
 
     for tweet in tweet_list:
-        if "entities" in tweet:
-            if "media" in tweet["entities"]:
-                image_tweets.append(tweet)
+        has_images = False
+        if "extended_entities" in tweet:
+            if "media" in tweet["extended_entities"]:
+                for media in tweet["extended_entities"]["media"]:
+                    if "type" in media:
+                        if media["type"] in MEDIA_IMAGE_TYPES:
+                            # print("Tweet {tid} has images: {imgs}".format(tid=tweet["id_str"], imgs=media["media_url_https"]))
+                            has_images = True
+        if has_images:
+            image_tweets.append(tweet)
 
     return image_tweets
+
+
+def get_image_urls_from_tweet(tweet: dict):
+    image_urls = []
+    if "extended_entities" in tweet:
+        if "media" in tweet["extended_entities"]:
+            for media in tweet["extended_entities"]["media"]:
+                if media["type"] in MEDIA_IMAGE_TYPES:
+                    image_url = media["media_url_https"]
+                    if image_url not in image_urls:
+                        # print("Appending tweet with url: {url}".format(url=image_url))
+                        image_urls.append(media["media_url_https"])
+
+    return image_urls
